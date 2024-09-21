@@ -1,13 +1,13 @@
 import { Data } from "@/models/data";
 import {connectDB} from "@/utils/connectDB";
-import { NextResponse } from "next/server";
+import { NextResponse,NextRequest } from "next/server";
 import { v2 as cloudinary } from 'cloudinary';
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
 });
-export async function POST(req:NextResponse){
+export async function POST(req:NextRequest){
     
     await connectDB();
     const form = await req.formData()
