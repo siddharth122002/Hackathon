@@ -12,14 +12,6 @@ function Create() {
   const [levelType, setLevelType] = useState<string>("easy");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const fileChangeHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-        const dataUrl = await readFileAsDataUrl(file);
-    }
-  }
-
-
   const handleUpload = () => {
     inputRef.current?.click();
   };
@@ -124,7 +116,7 @@ function Create() {
             />
           </div>
           <input
-          onChange={fileChangeHandler}
+
           ref={inputRef} className='hidden' type="file" name="file" id="file" />
         </div>
       </div>

@@ -11,7 +11,7 @@ export async function POST(req:NextResponse){
     
     await connectDB();
     const form = await req.formData()
-    console.log(form)
+    // console.log(form)
     const title=form.get('title')
     const start=form.get('start')
     const end=form.get('end')
@@ -24,8 +24,8 @@ export async function POST(req:NextResponse){
             const imageBuffer = await image.arrayBuffer();
             const imageBase64 = Buffer.from(imageBuffer).toString('base64');
             const imageDataUri = `data:${image.type};base64,${imageBase64}`;
-            let uploadResponse;
-            uploadResponse = await cloudinary.uploader.upload(imageDataUri);
+        
+            const uploadResponse = await cloudinary.uploader.upload(imageDataUri);
             const newEntry=await Data.create({
                 image:uploadResponse?.secure_url,
                 title:title,
@@ -38,6 +38,6 @@ export async function POST(req:NextResponse){
             return NextResponse.json("success")
         }
     }catch(e){
-        return NextResponse.json("error");
+        return NextResponse.json({e});
     }
 }

@@ -14,12 +14,7 @@ function Edit() {
   const inputRef = useRef<HTMLInputElement>(null);
   const params = useParams();
   const {id}=params;
-  const fileChangeHandler = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-        const dataUrl = await readFileAsDataUrl(file);
-    }
-  }
+
   const handleUpload = () => {
     inputRef.current?.click();
   };
@@ -131,7 +126,6 @@ function Edit() {
             </div>
           </div>
           <input 
-          onChange={fileChangeHandler}
           ref={inputRef} className='hidden' type="file" name="file" id="file" />
         </div>
       </div>

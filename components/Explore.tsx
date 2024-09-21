@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import SearchIcon from '@mui/icons-material/Search'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import { CardData, filtering, Timer } from '@/types'
+import { CardData, filtering } from '@/types'
 import CardSection from './CardSection';
 function Explore() {
   const [loading,setLoading]=useState(true);
@@ -67,7 +67,7 @@ function Explore() {
     }
   }
   useEffect(() => {
-    let dataa = datas.filter((data)=>{
+    const dataa = datas.filter((data)=>{
       const newData=data.title.toLowerCase().includes(searchQuery.toLowerCase());
       return newData;
     })
@@ -77,7 +77,7 @@ function Explore() {
   useEffect(() => {
     const rn = new Date().getTime();
     let tempData:CardData[]=[] // current time
-    const filteredResults = datas.filter((data) => {
+    datas.filter((data) => {
       const starts = data.start.getTime();
       const ends = data.end.getTime();
       

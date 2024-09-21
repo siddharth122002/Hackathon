@@ -8,6 +8,7 @@ export async function GET(){
         const allData = await Data.find({});
         return NextResponse.json(allData)
     }catch(e){
-        return NextResponse.json("error");
+        
+        return NextResponse.json(e);
     }
 }

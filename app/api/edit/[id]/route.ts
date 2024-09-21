@@ -27,8 +27,8 @@ export async function PUT(req: NextRequest) {
             const imageBuffer = await image.arrayBuffer();
             const imageBase64 = Buffer.from(imageBuffer).toString('base64');
             const imageDataUri = `data:${image.type};base64,${imageBase64}`;
-            let uploadResponse;
-            uploadResponse = await cloudinary.uploader.upload(imageDataUri);
+           
+            const uploadResponse = await cloudinary.uploader.upload(imageDataUri);
             const updatedEntry = await Data.findByIdAndUpdate(id,{
                 image:uploadResponse?.secure_url,
                 title:title,
