@@ -30,7 +30,8 @@ function Details() {
                 <div className='flex flex-col gap-4 md:pt-28 pt-8'>
                 <div className='flex  bg-[#FFCE5C] md:font-semibold items-center gap-3 py-1 rounded-md md:px-7 text-xs md:text-lg text-black md:w-fit w-60'>
                     <QueryBuilderIcon/>
-                    <p>Starts on 17th Jun'22 09:00 PM (India Standard Time)</p>
+                    <p>Starts on 17th Jun&apos;22 09:00 PM (India Standard Time)</p>
+
                 </div>
                 <div className='md:text-4xl py-3 font-semibold w-full'>Data Sprint 72 - Butterfly Identification</div>
                 <div className='md:text-lg w-full'>

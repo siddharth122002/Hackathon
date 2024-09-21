@@ -3,7 +3,6 @@ import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useParams } from 'next/navigation';
-import { readFileAsDataUrl } from '@/utils/utils';
 
 function Edit() {
   const [challengeName, setChallengeName] = useState<string>("");

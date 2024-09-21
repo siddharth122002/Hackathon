@@ -73,10 +73,10 @@ function Explore() {
     })
   
     setFilteredData(dataa);
-  }, [searchQuery]);
+  }, [searchQuery,datas]);
   useEffect(() => {
     const rn = new Date().getTime();
-    let tempData:CardData[]=[] // current time
+    const tempData:CardData[]=[] // current time
     datas.filter((data) => {
       const starts = data.start.getTime();
       const ends = data.end.getTime();
@@ -112,7 +112,7 @@ function Explore() {
     if(tempData.length!=0){
       setFilteredData(tempData);
     }
-  }, [filters]);
+  }, [filters,datas]);
   
   
 

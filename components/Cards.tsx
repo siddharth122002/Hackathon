@@ -3,8 +3,7 @@ import Image from 'next/image'
 import React from 'react'
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import Link from 'next/link';
-import { CardData, Timer } from '@/types';
-import { useState,useEffect } from 'react';
+import { CardData } from '@/types';
 function Cards({data}:{data:CardData}) {
     // const [status,setStatus]=useState<string>("Upcoming")
     const status="Upcoming"
@@ -15,7 +14,7 @@ function Cards({data}:{data:CardData}) {
     //     seconds:0
     // });
     // const [ended,setEnded]=useState<string>("");
-    const ended=""
+    // const ended=""
     // useEffect(() => {
     //     const rn = new Date().getTime();
     //     const starts = data.start.getTime();
@@ -48,12 +47,12 @@ function Cards({data}:{data:CardData}) {
     //         setTimeLeft({ days: 0, hours: 0, minutes: 0,seconds:0});
     //     }
     // }
-    useEffect(()=>{
+    // useEffect(()=>{
         // console.log(data)
         // TimeLeft();
         // const timer = setInterval(TimeLeft,1000)
         // return ()=>clearInterval(timer)
-    },[])
+    // },[])
     // console.log(data)
   return (
         <Link href={`/details/${data._id}`}>

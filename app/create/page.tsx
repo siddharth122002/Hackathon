@@ -1,5 +1,4 @@
 "use client"
-import { readFileAsDataUrl } from '@/utils/utils';
 import Image from 'next/image'
 import React, { useRef, useState } from 'react'
 
@@ -34,7 +33,7 @@ function Create() {
       body: formData,
     });
     
-    const response = await res.json();
+    // const response = await res.json();
     // console.log(response);
     setLoading(false);
   };
