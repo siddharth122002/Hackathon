@@ -16,6 +16,10 @@ function Create() {
   };
 
   const handleSubmit = async () => {
+    if (!challengeName || !startDate || !endDate || !description || !inputRef.current?.files?.[0]) {
+      alert("Please fill out all required fields.");
+      return;
+  }
     const formData = new FormData();
   
     formData.append('title', challengeName);

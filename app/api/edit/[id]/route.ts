@@ -12,7 +12,7 @@ export async function PUT(req: NextRequest) {
 
     await connectDB();
     const form = await req.formData()
-    console.log(form)
+    // console.log(form)
     const title=form.get('title')
     const start=form.get('start')
     const end=form.get('end')
@@ -37,6 +37,7 @@ export async function PUT(req: NextRequest) {
                 level:level,
                 description:description,
             }); 
+            console.log(updatedEntry);
             await updatedEntry.save();
             return NextResponse.json("success")
         }

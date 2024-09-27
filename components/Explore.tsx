@@ -14,8 +14,6 @@ function Explore() {
     const getData = async()=>{
       const res = await fetch('/api/all');
       const response = await res.json()
-      // console.log(res);
-      // console.log(response);
       setDatas(response)
       setFilteredData(response)
       setLoading(false);
@@ -75,25 +73,25 @@ function Explore() {
     setFilteredData(dataa);
   }, [searchQuery,datas]);
   useEffect(() => {
-    // const rn = new Date().getTime();
+    const rn = new Date().getTime();
     const tempData:CardData[]=[] // current time
     datas.filter((data) => {
-      // const starts = data.start.getTime();
-      // const ends = data.end.getTime();
+      const starts = new Date(data.start).getTime()
+      const ends =new Date(data.end).getTime();
       
-      // Time Filters
-      // const isActive = filters.active && rn >= starts && rn < ends;
-      // if(isActive){
-      //   tempData.push(data);
-      // }
-      // const isUpcoming = filters.upcoming && rn < starts;
-      // if(isUpcoming){
-      //   tempData.push(data);
-      // }
-      // const isPast = filters.past && rn > ends;
-      // if(isPast){
-      //   tempData.push(data);
-      // }
+      // // Time Filters
+      const isActive = filters.active && rn >= starts && rn < ends;
+      if(isActive){
+        tempData.push(data);
+      }
+      const isUpcoming = filters.upcoming && rn < starts;
+      if(isUpcoming){
+        tempData.push(data);
+      }
+      const isPast = filters.past && rn > ends;
+      if(isPast){
+        tempData.push(data);
+      }
       
       //difficulty filters
       const isEasy = filters.easy && data.level === "easy";

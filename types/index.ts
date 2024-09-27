@@ -4,7 +4,8 @@ export interface CardData{
     title:string,
     start:Date,
     end:Date,
-    level:string
+    level:string,
+    description:string
 }
 export interface Timer{
     days:number,

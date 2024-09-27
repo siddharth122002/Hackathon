@@ -11,7 +11,6 @@ export async function POST(req:NextRequest){
     
     await connectDB();
     const form = await req.formData()
-    // console.log(form)
     const title=form.get('title')
     const start=form.get('start')
     const end=form.get('end')

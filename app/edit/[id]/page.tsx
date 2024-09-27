@@ -1,11 +1,28 @@
 "use client"
 import Image from 'next/image';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { useParams } from 'next/navigation';
+import { CardData } from '@/types';
 
 function Edit() {
+  const[loading,setLoading]=useState(false);
+  useEffect(()=>{
+    const getData=async()=>{
+        const response = await fetch(`/api/details/${id}`);
+        const res = await response.json()
+        setLoading(false)
+        console.log(res)
+        setLevelType(res.level)
+        setDescription(res.description)
+        setChallengeName(res.title)
+        setImage(res.image)
+    }
+    getData()
+    
+},[])
   const [challengeName, setChallengeName] = useState<string>("");
+  const [image,setImage]=useState("")
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -13,12 +30,15 @@ function Edit() {
   const inputRef = useRef<HTMLInputElement>(null);
   const params = useParams();
   const {id}=params;
-
   const handleUpload = () => {
     inputRef.current?.click();
   };
 
   const handleSaveChanges = async () => {
+    if (!challengeName || !startDate || !endDate || !description || !inputRef.current?.files?.[0]) {
+      alert("Please fill out all required fields.");
+      return;
+  }
     const formData = new FormData();
   
     formData.append('title', challengeName);
@@ -30,14 +50,15 @@ function Edit() {
     if (inputRef.current?.files?.[0]) {
       formData.append('image', inputRef.current.files[0]);
     }
-
+    setLoading(true)
     const res = await fetch(`/api/edit/${id}`, {
       method: 'PUT',
       body: formData,
     });
-
+    console.log(res);
     const response = await res.json();
     console.log(response);
+    setLoading(false)
     // Handle response (success or error)
   };
 
@@ -54,7 +75,6 @@ function Edit() {
             id='name'
             className='placeholder-slate-400 border-[1px] w-full max-w-96 h-8 p-3 border-slate-400 mt-5 rounded-md'
             type="text" 
-            placeholder='Data science challenge'
             value={challengeName}
             onChange={(e) => setChallengeName(e.target.value)}
           />
@@ -94,7 +114,7 @@ function Edit() {
             name="desc" 
             id="desc" 
             className='placeholder-slate-400 border-[1px] w-full md:w-3/4 h-72 p-3 border-slate-400 mt-5 rounded-md'
-            placeholder="Identify the class to which each butterfly belongs to"
+           
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
@@ -108,7 +128,7 @@ function Edit() {
             onClick={handleUpload}
             className='bg-[#F8F9FD] w-full md:w-fit p-4 rounded-md'>
             <Image
-              src={'/cardimage/Group 1000002766.png'}
+              src={image}
               width={300}
               height={300}
               alt='cloud'
@@ -145,9 +165,11 @@ function Edit() {
 
       <div className='px-6 md:px-16 lg:px-24 xl:px-32 mb-16 mt-8'>
         <button 
+          className='bg-[#44924C] text-xl rounded-md px-7 py-3 text-white'
           onClick={handleSaveChanges}
-          className='bg-[#44924C] text-xl rounded-md px-7 py-3 text-white w-full md:w-auto'>
-          Save Changes
+        >
+          <div className='flex justify-center items-center gap-3'>Save Changes
+          {loading && <div className='w-3 h-3 border-white border-b-[2px] border-t-[2px] border-l-[2px] rounded-full animate-spin'></div>}</div>
         </button>
       </div>
     </div>
