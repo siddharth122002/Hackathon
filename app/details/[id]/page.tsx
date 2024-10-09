@@ -46,7 +46,22 @@ function Details() {
                 <div className='flex flex-col gap-4 md:pt-28 pt-8'>
                 <div className='flex  bg-[#FFCE5C] md:font-semibold items-center gap-3 py-1 rounded-md md:px-7 text-xs md:text-lg text-black md:w-fit w-60'>
                     <QueryBuilderIcon/>
-                    <p>{data?(new Date(data.start).toDateString()):("error")}</p>
+                    <p>
+                        {data ? (
+                                new Date(data.start).getTime() > Date.now() ? (
+                                <>
+                                    Starts on {new Date(data.start).toDateString()}
+                                </>
+                                ) : (
+                                <>
+                                    Started on {new Date(data.start).toDateString()}
+                                </>
+                                )
+                            ) : (
+                                "Loading..."
+                            )}
+                    </p>
+
 
                 </div>
                 <div className='md:text-4xl py-3 font-semibold w-full'>{data?.title}</div>
